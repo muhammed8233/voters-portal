@@ -2,6 +2,9 @@ package com.example.voters.portal.VoterInformation;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 @Entity
 @Table
 public class VoterInformation {
@@ -17,22 +20,27 @@ public class VoterInformation {
     )
     private Long id;
     private String votersName;
+    private LocalDate dob;
+    @Transient
     private int votersAge;
+    private String votersEmail;
     private String stateOfOrigin;
 
 
     public VoterInformation(){}
 
-    public VoterInformation(Long id, int votersAge, String votersName, String stateOfOrigin) {
+    public VoterInformation(Long id, String votersName,
+                            LocalDate dob, String votersEmail, String stateOfOrigin) {
         this.id = id;
-        this.votersAge = votersAge;
         this.votersName = votersName;
+        this.dob = dob;
+        this.votersEmail = votersEmail;
         this.stateOfOrigin = stateOfOrigin;
     }
 
-    public VoterInformation(String votersName, int votersAge, String stateOfOrigin) {
+    public VoterInformation(String votersName, String votersEmail, String stateOfOrigin) {
         this.votersName = votersName;
-        this.votersAge = votersAge;
+        this.votersEmail = votersEmail;
         this.stateOfOrigin = stateOfOrigin;
     }
 
@@ -53,7 +61,7 @@ public class VoterInformation {
     }
 
     public int getVotersAge() {
-        return votersAge;
+        return Period.between(this.dob, LocalDate.now()).getYears();
     }
 
     public void setVotersAge(int votersAge) {
@@ -64,8 +72,24 @@ public class VoterInformation {
         return stateOfOrigin;
     }
 
+    public String getVotersEmail() {
+        return votersEmail;
+    }
+
+    public void setVotersEmail(String votersEmail) {
+        this.votersEmail = votersEmail;
+    }
+
     public void setStateOfOrigin(String stateOfOrigin) {
         this.stateOfOrigin = stateOfOrigin;
+    }
+
+    public LocalDate getDob() {
+        return dob;
+    }
+
+    public void setDob(LocalDate dob) {
+        this.dob = dob;
     }
 
     @Override
@@ -73,7 +97,9 @@ public class VoterInformation {
         return "VoterInformation{" +
                 "id=" + id +
                 ", votersName='" + votersName + '\'' +
+                ", votersDob='" + dob + '\'' +
                 ", votersAge=" + votersAge +
+                ", votersEmail='" + votersEmail + '\'' +
                 ", stateOfOrigin='" + stateOfOrigin + '\'' +
                 '}';
     }

@@ -14,12 +14,12 @@ public class VoterInformationConfiguration {
         return args -> {
             VoterInformation lami = new VoterInformation(
                     "lami",
-                    21,
+                    "lamiKulu@gmail.com",
                     "Kaduna"
             );
             VoterInformation hamza = new VoterInformation(
                     "hamza",
-                    25,
+                    "hamzashapilo21@yahoo.com",
                     "Benue"
             );
             repository.saveAll(
